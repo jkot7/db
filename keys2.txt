@@ -1,0 +1,25 @@
+CREATE TABLE STUDENT (
+    StudentID INT PRIMARY KEY,               -- Primary Key
+    RollNo INT UNIQUE,                       -- Unique Key
+    Name VARCHAR(100) NOT NULL,              -- NOT NULL Constraint
+    Age INT CHECK (Age >= 18),               -- CHECK Constraint
+    City VARCHAR(50) DEFAULT 'Unknown'       -- DEFAULT Constraint
+);
+
+CREATE TABLE ENROLLMENT (
+    EnrollID INT PRIMARY KEY,
+    StudentID INT,
+    CourseName VARCHAR(100) NOT NULL,
+    FOREIGN KEY (StudentID) REFERENCES STUDENT(StudentID)   -- Foreign Key
+);
+
+ALTER TABLE STUDENT
+ADD Email VARCHAR(100) UNIQUE;
+
+
+ALTER TABLE STUDENT
+MODIFY Name VARCHAR(150);
+
+-- Drop the child table first to avoid foreign key errors
+DROP TABLE ENROLLMENT;
+DROP TABLE STUDENT;
