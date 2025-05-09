@@ -1,0 +1,33 @@
+create table student(
+sno int,
+name varchar(10),
+sub1 int,
+sub2 int,
+sub3 int,
+total int,
+percentage float(5,2),
+grade varchar(20)
+);
+
+
+insert into student values
+(1,'VINAY',55,66,77,NULL,NULL,NULL),
+(2,'AJIT',66,44,77,NULL,NULL,NULL),
+(3,'VIRAT',50,60,70,NULL,NULL,NULL),
+(4,'JIT',30,30,30,NULL,NULL,NULL),
+(5,'RAHUL',52,62,57,NULL,NULL,NULL),
+(6,'KAPIL',65,45,75,NULL,NULL,NULL),
+(7,'ROHIT',52,60,50,NULL,NULL,NULL),
+(8,'SUSHIL',67,46,75,NULL,NULL,NULL),
+(9,'SACHIN',50,50,50,NULL,NULL,NULL),
+(10,'SUNIL',60,40,70,NULL,NULL,NULL)//
+
+
+create view s_view as
+select * from student;
+
+
+update s_view set name='SAHIL' where sno=3;
+
+
+select * from s_view order by name;

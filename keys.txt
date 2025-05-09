@@ -1,0 +1,48 @@
+ create table department( 
+ dept_id int (20) PRIMARY KEY, 
+ dept_name varchar(20) 
+  ); 
+
+ 
+create table Employee( 
+emp_id int (20) PRIMARY KEY, 
+emp_name char(20) NOT NULL, 
+dept_id int(20), 
+UNIQUE(emp_name),
+FOREIGN KEY (dept_id) REFERENCES department (dept_id) 
+); 
+
+ 
+Alter table Employee ADD column salary int(20); 
+
+ 
+mysql> desc Employee; 
++----------+----------+------+-----+---------+-------+ 
+| Field    | Type     | Null | Key | Default | Extra | 
++----------+----------+------+-----+---------+-------+ 
+| emp_id   | int      | NO   | PRI | NULL    |       | 
+| emp_name | char(20) | NO   |     | NULL    |       | 
+| dept_id  | int      | YES  | MUL | NULL    |       | 
+| salary   | int      | YES  |     | NULL    |       | 
++----------+----------+------+-----+---------+-------+ 
+4 rows in set (0.01 sec) 
+ 
+Alter table employee MODIFY column emp_name char(150); 
+
+ 
+mysql> desc Employee; 
++----------+-----------+------+-----+---------+-------+ 
+| Field    | Type      | Null | Key | Default | Extra | 
++----------+-----------+------+-----+---------+-------+ 
+| emp_id   | int       | NO   | PRI | NULL    |       | 
+| emp_name | char(150) | YES  |     | NULL    |       | 
+| dept_id  | int       | YES  | MUL | NULL    |       | 
+| salary   | int       | YES  |     | NULL    |       | 
++----------+-----------+------+-----+---------+-------+ 
+4 rows in set (0.00 sec) 
+mysql> DROP table Employee; 
+Query OK, 0 rows affected (0.04 sec) 
+mysql> DROP table department; 
+Query OK, 0 rows affected (0.04 sec) 
+mysql> desc Employee; 
+ERROR 1146 (42S02): Table 'sample.employee' doesn't exist 

@@ -1,0 +1,50 @@
+create table account
+(
+acc_no int(20),
+name varchar(20),
+amount int(20)
+);
+
+
+insert into account values
+(1,'AMAR',2000),
+(2,'AJAY',3000),
+(3,'RAHUL',6000),
+(4,'AMIT',7000),
+(5,'SATISH',8000);
+
+
+create table account_log
+(
+acc_no int(20),
+name varchar(20),
+amount int(20),
+tran_type varchar(20),
+tran_time timestamp
+);
+
+
+delimiter //
+create trigger t1
+after update
+on account
+for each row
+begin
+declare amt varchar(20);
+declare tran_type varchar(20);
+if (old.amount > new.amount) then
+set tran_type = 'WITHDRAW';
+set amt = old.amount - new.amount;
+else
+set amt = new.amount - old.amount;
+set tran_type = 'DEPOSIT';
+end if;
+insert into account_log values(old.acc_no,old.name,amt,tran_type,now());
+end
+//
+
+
+update account set amount=5000 where acc_no=1//
+
+
+select * from account_log//
